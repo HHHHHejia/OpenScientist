@@ -1,19 +1,19 @@
 # Skill Schema
 
-This document defines the specification for ResearchSkills skill files (manually written skills).
-
-> **Skills extracted via /researchskills-extract** are now the primary contribution format. See [Skill Schema Design](../docs/superpowers/specs/2026-04-11-skill-schema-design.md) for the current schema. This document covers only the manual skill file format.
+This document defines the current specification for ResearchSkills skill files.
 
 ---
 
 ## 1. File Location
 
 ```
-skills/<domain>/<subdomain>/<skill-name>.md
+.agents/skills/<domain>/<subdomain>/<contributor>/<memory_type>/<subtype>--<skill-name>.md
 ```
 
 - `domain` must match one of: `physics`, `mathematics`, `computer-science`, `quantitative-biology`, `statistics`, `eess`, `economics`, `quantitative-finance`, `management`
-- `subdomain` must match one of the arXiv-aligned subdomain folders under each domain (see `skills/<domain>/` for the full list)
+- `subdomain` must match one of the arXiv-aligned subdomain folders under each domain (see `.agents/skills/<domain>/` for the full list)
+- `contributor` should be the contributor's GitHub username or stable public handle
+- `memory_type` must be one of: `procedural`, `semantic`, `episodic`
 - `skill-name` must be lowercase, hyphen-separated
 
 ---
@@ -23,12 +23,11 @@ skills/<domain>/<subdomain>/<skill-name>.md
 ```yaml
 ---
 name: <string>                  # REQUIRED. Unique identifier. Lowercase, hyphen-separated.
-description: <string>           # REQUIRED. 1-2 sentences. When should this skill be invoked?
+memory_type: <string>           # REQUIRED. procedural | semantic | episodic
+subtype: <string>               # REQUIRED. Depends on memory_type.
 domain: <string>                # REQUIRED. One of: physics | mathematics | computer-science | quantitative-biology | statistics | eess | economics | quantitative-finance | management
-subdomain: <string>             # optional. More specific area within the domain.
-author: <string>                # REQUIRED. "Full Name (Affiliation)"
-expertise_level: <string>       # REQUIRED. One of: beginner | intermediate | advanced
-status: <string>                # REQUIRED. One of: draft | reviewed | verified
+subdomain: <string>             # REQUIRED. arXiv-aligned subdomain slug.
+contributor: <string>           # REQUIRED. GitHub username or stable public handle.
 ---
 ```
 
@@ -37,49 +36,76 @@ status: <string>                # REQUIRED. One of: draft | reviewed | verified
 | Field | Required | Type | Valid Values |
 |---|---|---|---|
 | `name` | yes | string | lowercase, hyphens only |
-| `description` | yes | string | 1-2 sentences |
+| `memory_type` | yes | enum | `procedural` `semantic` `episodic` |
+| `subtype` | yes | enum | see subtype table below |
 | `domain` | yes | enum | see list above |
-| `subdomain` | no | string | free text |
-| `author` | yes | string | "Name (Affiliation)" |
-| `expertise_level` | yes | enum | `beginner` `intermediate` `advanced` |
-| `status` | yes | enum | `draft` `reviewed` `verified` |
+| `subdomain` | yes | string | arXiv-aligned subdomain folder |
+| `contributor` | yes | string | GitHub username or public handle |
+
+### 2.2 Subtypes
+
+| Memory Type | Valid Subtypes |
+|---|---|
+| `procedural` | `tie`, `no-change`, `constraint-failure`, `operator-fail` |
+| `semantic` | `frontier`, `non-public`, `correction` |
+| `episodic` | `failure`, `adaptation`, `anomalous` |
 
 ---
 
 ## 3. Body Sections
 
-The skill body (after frontmatter) should follow this structure. Sections marked **Required** must be present.
+The skill body (after frontmatter) should follow the structure for its memory type.
 
-### 3.1 Required Sections
-
-```markdown
-## Purpose
-One paragraph explaining what problem this skill solves and when to invoke it.
-
-## Domain Knowledge
-Key concepts, definitions, equations, and established facts the AI needs to know.
-
-## Reasoning Protocol
-Numbered steps guiding the AI through the reasoning process for this domain.
-
-## Common Pitfalls
-Mistakes, misconceptions, and edge cases to avoid.
-```
-
-### 3.2 Recommended Sections
+### 3.1 Procedural
 
 ```markdown
-## Examples
-One or more worked examples demonstrating correct application of the skill.
+## When
+Precise trigger conditions and exclusions.
 
-## References
-Key papers, textbooks, or resources.
+## Decision
+Preferred action, rejected alternatives, and reasoning.
+
+## Local Verifiers
+Concrete checks that the action is working.
+
+## Failure Handling
+Fallback steps if the preferred action fails.
+
+## Anti-exemplars
+Situations where this skill should not be used.
 ```
 
----
+### 3.2 Semantic
 
-## 4. Extracted Skills Schema
+```markdown
+## Fact
+The specific fact, correction, or frontier knowledge.
 
-The primary contribution format is now **research skills** — cognitive memory extracted from AI conversation history, organized into procedural (IF-THEN rules), semantic (domain facts), and episodic (research episodes) types.
+## Evidence
+Why this fact is known or credible.
 
-For the full skill schema specification, see [docs/superpowers/specs/2026-04-11-skill-schema-design.md](../docs/superpowers/specs/2026-04-11-skill-schema-design.md).
+## LLM Default Belief
+For correction skills, what the model is likely to get wrong.
+
+## Expiry Signal
+When this fact may become stale.
+```
+
+### 3.3 Episodic
+
+```markdown
+## Situation
+The concrete research situation.
+
+## Action
+What was tried or changed.
+
+## Outcome
+What happened.
+
+## Lesson
+The reusable lesson.
+
+## Retrieval Cues
+When an agent should recall this episode.
+```

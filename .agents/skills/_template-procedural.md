@@ -3,7 +3,7 @@ name: your-skill-name
 memory_type: procedural
 subtype: tie                                   # tie | no-change | constraint-failure | operator-fail
 domain: physics                                # physics | mathematics | computer-science | quantitative-biology | statistics | eess | economics | quantitative-finance
-subdomain: geophysics                          # arXiv-aligned subdomain (see skills/<domain>/ for options)
+subdomain: geophysics                          # arXiv-aligned subdomain (see .agents/skills/<domain>/ for options)
 contributor: your-github-username
 ---
 
@@ -20,8 +20,8 @@ contributor: your-github-username
     operator-fail    — Correct approach selected but execution fails
 
   File placement:
-    skills/<domain>/<subdomain>/<contributor>/<memory_type>/<subtype>--<skill-name>.md
-    Example: skills/physics/geophysics/jdoe/procedural/tie--exploiting-cross-domain-concepts.md
+    .agents/skills/<domain>/<subdomain>/<contributor>/<memory_type>/<subtype>--<skill-name>.md
+    Example: .agents/skills/physics/geophysics/jdoe/procedural/tie--exploiting-cross-domain-concepts.md
 
   Instructions:
     1. Fill in all frontmatter fields above.

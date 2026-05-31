@@ -1,7 +1,7 @@
 ## Submission Type
 
-- [ ] **Research Skill** — extracted via `/researchskills-extract`, converted via `/researchskills-convert`, or written by hand using the research skill templates
-- [ ] **Decision Tree** — research trajectory extracted via `/researchskills-extract` or web prompt
+- [ ] **Research Skill** — extracted or converted via the ResearchSkills meta skill, or written by hand using the research skill templates
+- [ ] **Decision Tree** — research trajectory extracted via the ResearchSkills meta skill or web prompt
 - [ ] **Skill (from Gemini/ChatGPT/Claude Web UI)** — submit via [here](https://researchskills.ai/submit-manually)
 - [ ] **Skill (legacy)** — manually written skill file using the legacy template (`_template.md`)
 
@@ -11,7 +11,7 @@
 
 **Domain / Subdomain:** <!-- e.g. physics / geophysics -->
 
-- [ ] Files are placed in `skills/<domain>/<subdomain>/<contributor>/<memory_type>/`
+- [ ] Files are placed in `.agents/skills/<domain>/<subdomain>/<contributor>/<memory_type>/`
 - [ ] Filenames follow the pattern `<subtype>--<skill-name>.md` (lowercase, hyphen-separated)
 - [ ] All **required** frontmatter fields are filled in (`name`, `memory_type`, `subtype`, `domain`, `subdomain`, `contributor`)
 - [ ] All **required** body sections are present for each memory type:
@@ -34,7 +34,7 @@
 **Domain:** <!-- e.g. physics / quantum-physics -->
 **Skill name:** <!-- value of the `name` frontmatter field -->
 
-- [ ] File is placed in the correct `skills/<domain>/<subdomain>/` folder
+- [ ] File is placed in the correct `.agents/skills/<domain>/<subdomain>/` folder
 - [ ] Filename is lowercase and hyphen-separated
 - [ ] All **required** frontmatter fields are filled in (`name`, `description`, `domain`, `author`, `expertise_level`, `status: draft`)
 - [ ] All **required** body sections are present: Purpose, Domain Knowledge, Reasoning Protocol, Common Pitfalls

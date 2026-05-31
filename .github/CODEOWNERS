@@ -7,26 +7,26 @@
 *                              @HHHHHejia
 
 # Domain reviewers (arXiv-aligned) — fill in as experts are onboarded
-skills/physics/                @HHHHHejia   # TODO: replace with physics reviewer
-skills/physics/fluid-dynamics/  @qijiang-yoyo @HHHHHejia
-skills/physics/space-physics/  @huangzesen @HHHHHejia
-skills/physics/atmospheric-and-oceanic-physics/  @ktwu01 @HHHHHejia
-skills/physics/atmospheric-and-oceanic-physics/  @ktwu01 @HHHHHejia
-skills/physics/chemical-physics/  @Alexandrina-Chen @HHHHHejia
-skills/mathematics/            @HHHHHejia   # TODO: replace with math reviewer
-skills/computer-science/       @HHHHHejia   # TODO: replace with CS reviewer
-skills/computer-science/graphics/  @zjw49246 @HHHHHejia
-skills/computer-science/computation-and-language/  @hengzzzhou @HHHHHejia
-skills/computer-science/artificial-intelligence/  @zjw49246 @HHHHHejia
-skills/computer-science/hardware-architecture/  @Zhichenzzz @HHHHHejia
-skills/computer-science/multiagent-systems/  @wu-yc @HHHHHejia
-skills/computer-science/cryptography-and-security/  @xhyumiracle @HHHHHejia
-skills/quantitative-biology/   @HHHHHejia   # TODO: replace with q-bio reviewer
-skills/quantitative-biology/biomolecules/  @qijiang-yoyo @HHHHHejia
-skills/statistics/             @HHHHHejia   # TODO: replace with statistics reviewer
-skills/eess/                   @HHHHHejia   # TODO: replace with EESS reviewer
-skills/economics/              @HHHHHejia   # TODO: replace with economics reviewer
-skills/economics/general-economics/  @GalacEqua @HHHHHejia
-skills/quantitative-finance/   @HHHHHejia   # TODO: replace with q-fin reviewer
-skills/quantitative-finance/economics/  @Xinxin-m @HHHHHejia
-skills/management/             @HHHHHejia   # TODO: replace with management reviewer
+.agents/skills/physics/                @HHHHHejia   # TODO: replace with physics reviewer
+.agents/skills/physics/fluid-dynamics/  @qijiang-yoyo @HHHHHejia
+.agents/skills/physics/space-physics/  @huangzesen @HHHHHejia
+.agents/skills/physics/atmospheric-and-oceanic-physics/  @ktwu01 @HHHHHejia
+.agents/skills/physics/atmospheric-and-oceanic-physics/  @ktwu01 @HHHHHejia
+.agents/skills/physics/chemical-physics/  @Alexandrina-Chen @HHHHHejia
+.agents/skills/mathematics/            @HHHHHejia   # TODO: replace with math reviewer
+.agents/skills/computer-science/       @HHHHHejia   # TODO: replace with CS reviewer
+.agents/skills/computer-science/graphics/  @zjw49246 @HHHHHejia
+.agents/skills/computer-science/computation-and-language/  @hengzzzhou @HHHHHejia
+.agents/skills/computer-science/artificial-intelligence/  @zjw49246 @HHHHHejia
+.agents/skills/computer-science/hardware-architecture/  @Zhichenzzz @HHHHHejia
+.agents/skills/computer-science/multiagent-systems/  @wu-yc @HHHHHejia
+.agents/skills/computer-science/cryptography-and-security/  @xhyumiracle @HHHHHejia
+.agents/skills/quantitative-biology/   @HHHHHejia   # TODO: replace with q-bio reviewer
+.agents/skills/quantitative-biology/biomolecules/  @qijiang-yoyo @HHHHHejia
+.agents/skills/statistics/             @HHHHHejia   # TODO: replace with statistics reviewer
+.agents/skills/eess/                   @HHHHHejia   # TODO: replace with EESS reviewer
+.agents/skills/economics/              @HHHHHejia   # TODO: replace with economics reviewer
+.agents/skills/economics/general-economics/  @GalacEqua @HHHHHejia
+.agents/skills/quantitative-finance/   @HHHHHejia   # TODO: replace with q-fin reviewer
+.agents/skills/quantitative-finance/economics/  @Xinxin-m @HHHHHejia
+.agents/skills/management/             @HHHHHejia   # TODO: replace with management reviewer

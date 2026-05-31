@@ -1,10 +1,10 @@
 > **Deprecated:** This document describes the Phase 1 decision tree format, which has been replaced by the cognitive memory-type skill system. See [Skill Schema Design](superpowers/specs/2026-04-11-skill-schema-design.md) for the current design.
 
-# /researchskills-extract v2 — Research Decision Tree Collection
+# ResearchSkills Meta Skill v2 — Research Decision Tree Collection
 
 ## Context
 
-v1 of `/researchskills-extract` treats chat history as uniform text and summarizes it into 10 fixed categories. This produces textbook-like output that misses the actual value: the tacit judgments researchers make during their work — what they tried, what they rejected, and why.
+v1 of the ResearchSkills extraction workflow treats chat history as uniform text and summarizes it into 10 fixed categories. This produces textbook-like output that misses the actual value: the tacit judgments researchers make during their work — what they tried, what they rejected, and why.
 
 **Strategic insight:** The scarcest resource is researcher participation, not algorithm precision. Rather than designing the perfect skill-extraction pipeline first, v2 prioritizes **collecting structured-but-flexible data at low friction**. We can iterate on downstream analysis later without re-collecting.
 
@@ -93,7 +93,7 @@ Actions interleave freely — the phase grouping is for human readability, not a
 
 ### Step 1: Local Extraction
 
-User runs `/researchskills-extract` in Claude Code or Codex. The system:
+User invokes the ResearchSkills meta skill in Claude Code or Codex. The system:
 
 1. Reads local conversation history.
 2. For each conversation, the LLM:

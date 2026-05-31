@@ -3,7 +3,7 @@ name: your-skill-name
 memory_type: episodic
 subtype: failure                               # failure | adaptation | anomalous
 domain: physics                                # physics | mathematics | computer-science | quantitative-biology | statistics | eess | economics | quantitative-finance
-subdomain: geophysics                          # arXiv-aligned subdomain (see skills/<domain>/ for options)
+subdomain: geophysics                          # arXiv-aligned subdomain (see .agents/skills/<domain>/ for options)
 contributor: your-github-username
 ---
 
@@ -19,8 +19,8 @@ contributor: your-github-username
     anomalous  — Expected A, observed B — turned out important
 
   File placement:
-    skills/<domain>/<subdomain>/<contributor>/<memory_type>/<subtype>--<skill-name>.md
-    Example: skills/physics/geophysics/jdoe/episodic/failure--gradient-explosion-under-fp16.md
+    .agents/skills/<domain>/<subdomain>/<contributor>/<memory_type>/<subtype>--<skill-name>.md
+    Example: .agents/skills/physics/geophysics/jdoe/episodic/failure--gradient-explosion-under-fp16.md
 
   Instructions:
     1. Fill in all frontmatter fields above.

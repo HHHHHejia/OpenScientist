@@ -32,7 +32,7 @@ This intuition lives in your head — the know-how, the heuristics, the reasonin
 
 **ResearchSkills captures it before it's lost.** We turn the tacit knowledge of the world's top researchers — their skills, thinking frameworks, and principles — into reusable AI agent skills (compatible with **Claude Code** and **Codex**). Every contribution makes every AI scientist — now and in the future — smarter, permanently.
 
-Each skill encodes the knowledge, tools, reasoning protocols, and common pitfalls of a scientific field. Skills can be written by domain experts or **auto-extracted from your research conversations** using `/researchskills-extract`. The command extracts three types of cognitive memory from your research sessions — **procedural** (IF-THEN rules for research impasses), **semantic** (facts LLMs don't know), and **episodic** (concrete research episodes) — then packages them as reusable skills. Point your AI agent at a skill, and it reasons like a domain expert.
+Each skill encodes the knowledge, tools, reasoning protocols, and common pitfalls of a scientific field. Skills can be written by domain experts or **auto-extracted from your research conversations** using the included ResearchSkills meta skill. The meta skill extracts three types of cognitive memory from your research sessions — **procedural** (IF-THEN rules for research impasses), **semantic** (facts LLMs don't know), and **episodic** (concrete research episodes) — then packages them as reusable skills. Point your AI agent at a skill, and it reasons like a domain expert.
 
 > **Note:** Applying a skill may trigger broad edits, long workflows, and significant token usage — review the expected scope before running one deeply.
 
@@ -54,71 +54,70 @@ Each skill encodes the knowledge, tools, reasoning protocols, and common pitfall
 
 ---
 
-<h2 align="center">2. How to Contribute</h2>
+<h2 align="center">2. Install ResearchSkills</h2>
 
-### Method A: Auto-Extract with `/researchskills-extract` (Recommended)
-
-> **Prerequisite:** [Install Node.js](https://nodejs.org/) (includes npm). LTS version recommended.
+Install the public ResearchSkills library into your local agent:
 
 ```bash
-npm install -g @scienceintelligence/researchskills-extract
+npx skills add ScienceIntelligence/ResearchSkills
 ```
 
-**Claude Code:**
-```
-/researchskills-extract
+Or with Bun:
+
+```bash
+bunx skills add ScienceIntelligence/ResearchSkills
 ```
 
-**Codex** (start with `codex -a never -s danger-full-access`):
-```
-$researchskills-extract
+---
+
+<h2 align="center">3. How to Contribute</h2>
+
+### Method A: Use the ResearchSkills Meta Skill (Recommended)
+
+Install the library, then ask Claude Code, Codex, or another markdown-aware agent to use the `researchskills-extract` skill. This is a **meta skill**: it turns conversation history, local skills, prompts, rubrics, notes, or other research know-how into ResearchSkills files.
+
+Example prompt:
+
+```text
+Use the ResearchSkills meta skill to extract or convert my research know-how into ResearchSkills files, validate them, and prepare a GitHub PR.
+
+Source material:
+- Ask me for the path(s), pasted text, or conversation export to use.
+- Read only that source and directly referenced files needed to understand it.
+
+Rules:
+- Create one ResearchSkills file per reusable research know-how item.
+- Use exactly one memory type: procedural, semantic, or episodic.
+- Use exactly one valid subtype for that memory type.
+- Put files under `.agents/skills/<domain>/<subdomain>/<contributor>/<memory_type>/<subtype>--<skill-name>.md`.
+- Preserve scientific content, but remove private paths, usernames, project names, private URLs, and collaborator names.
+- Skip generic engineering, DevOps, UI, database, Docker, git/npm, and textbook content unless it is directly research-method knowledge.
 ```
 
-> 💡 **For best results:** use the most powerful model with the highest reasoning effort — **Claude Code:** Opus 4.6 + max effort. **Codex:** GPT-5.4 + x-high. Don't worry about token usage — conversations are heavily compressed before analysis, and the per-session extraction is delegated to lighter models behind the scenes. Your chosen model mainly orchestrates the pipeline.
-
-The command scans your conversation history and extracts **research skills** organized by cognitive memory type:
+The meta skill extracts **research skills** organized by cognitive memory type:
 
 - **Procedural memory:** IF-THEN rules for navigating research impasses (e.g., "IF gradient explodes THEN check learning rate before architecture")
 - **Semantic memory:** Domain facts that LLMs don't reliably know (e.g., calibration constants, method limitations, undocumented tool behaviors)
 - **Episodic memory:** Concrete research episodes capturing what was tried, what failed, and what the researcher learned
 
-An interactive browser review page lets you verify the extracted skills, check de-identification, and bind them to your paper (arXiv/DOI) or project. Submit your skills to ResearchSkills, where they become part of a growing knowledge base for building better AI scientists.
+Review the generated files, check de-identification, validate them, and submit them by GitHub PR.
 
 ### Method B: One-Click Prompt for Web Users (ChatGPT / Claude / Gemini)
 After running, submit via [**here →**](https://researchskills.ai/submit-manually/#auto-parse)
 
-### Method C: Write Manually
+### Method C: Convert Existing Skills
+
+Already have a local skill, command, memory file, rubric, prompt, project instruction, note, or document? Use the same ResearchSkills meta skill from Method A. It converts existing material into `.agents/skills/<domain>/<subdomain>/<contributor>/<memory_type>/<subtype>--<skill-name>.md` files and prepares a PR.
+
+### Method D: Write Manually
 
 Write your own skill following the [**guide →**](https://researchskills.ai/submit-manually/#manual-entry)
-
-<details>
-<summary><strong>Method D: Convert Existing Skills via Claude Code / Codex</strong></summary>
-
-Already have research skills in notes, documents, or any format? Run one command — it reads your files, converts them, and opens a PR.
-
-```bash
-npm install -g @scienceintelligence/researchskills-extract
-```
-
-**Claude Code:**
-```
-/researchskills-convert
-```
-
-**Codex:**
-```
-$researchskills-convert
-```
-
-The command asks where your skills are, reads them, converts each one into the correct format, and opens a PR to this repository. Forking, branching, file placement, and de-identification are handled automatically.
-
-</details>
 
 > Don't see your field? [Propose a new area →](https://github.com/ScienceIntelligence/ResearchSkills/issues/new?template=04-propose-new-area.md) · Need a skill but can't write it yourself? [Request a skill →](https://github.com/ScienceIntelligence/ResearchSkills/issues/new?template=02-skill-request.yml)
 
 ---
 
-<h2 align="center">3. Skill Architecture</h2>
+<h2 align="center">4. Skill Architecture</h2>
 
 ResearchSkills skills are grounded in cognitive architecture theory — [Soar](https://en.wikipedia.org/wiki/Soar_(cognitive_architecture)) (Laird, 2012), [ACT-R](https://en.wikipedia.org/wiki/ACT-R) (Anderson, 1996), and [Case-Based Reasoning](https://en.wikipedia.org/wiki/Case-based_reasoning) (Kolodner, 1993). Skills are organized by **how researchers' minds actually store and retrieve expertise**, not by arbitrary categories.
 
@@ -166,7 +165,7 @@ Classified using Case-Based Reasoning terminology:
 ### Directory Structure
 
 ```
-skills/
+.agents/skills/
 └── {domain}/                    # 8 arXiv-aligned domains + management
     └── {subdomain}/             # 181 subcategories
         └── {contributor}/       # Your name
@@ -181,7 +180,7 @@ For the full rationale — why research is hard, why LLMs struggle with it, and 
 
 ---
 
-<h2 align="center">4. Become a Reviewer</h2>
+<h2 align="center">5. Become a Reviewer</h2>
 
 Reviewers are domain experts who guard the scientific quality of skills in their subdomain. You need substantial peer-review experience in the relevant field.
 
@@ -193,7 +192,7 @@ Reviewers are domain experts who guard the scientific quality of skills in their
 
 ---
 
-<h2 align="center">5. Domains</h2>
+<h2 align="center">6. Domains</h2>
 
 <div align="center">
 
