@@ -54,7 +54,23 @@ Each skill encodes the knowledge, tools, reasoning protocols, and common pitfall
 
 ---
 
-<h2 align="center">2. How to Contribute</h2>
+<h2 align="center">2. Install ResearchSkills</h2>
+
+Install the public ResearchSkills library into your local agent:
+
+```bash
+npx skills add ScienceIntelligence/ResearchSkills
+```
+
+Or with Bun:
+
+```bash
+bunx skills add ScienceIntelligence/ResearchSkills
+```
+
+---
+
+<h2 align="center">3. How to Contribute</h2>
 
 ### Method A: Auto-Extract with `/researchskills-extract` (Recommended)
 
@@ -114,11 +130,45 @@ The command asks where your skills are, reads them, converts each one into the c
 
 </details>
 
+<details>
+<summary><strong>Method E: One-Click Distill Prompt for Claude Code / Codex</strong></summary>
+
+Use this when you already have a local skill, command, memory file, rubric, or project-specific instruction and want an agent to convert it into ResearchSkills format and submit it as a GitHub PR.
+
+Paste this into Claude Code or Codex from the repository root:
+
+```text
+Convert my existing skill material into ResearchSkills format and submit it via GitHub PR.
+
+Source material:
+- Ask me for the path(s) to my existing skill, command, memory, rubric, prompt, or instruction file.
+- Read only those files and any directly referenced local files that are necessary to understand them.
+
+Conversion rules:
+- Convert each reusable research know-how item into one ResearchSkills skill.
+- Use exactly one memory type per skill: procedural, semantic, or episodic.
+- Use exactly one subtype:
+  - procedural: tie, no-change, constraint-failure, operator-fail
+  - semantic: frontier, non-public, correction
+  - episodic: failure, adaptation, anomalous
+- Put files under `.agents/skills/<domain>/<subdomain>/<contributor>/<memory_type>/<subtype>--<skill-name>.md`.
+- Preserve scientific content, but remove private paths, usernames, project names, private URLs, and collaborator names.
+- Skip generic engineering, DevOps, UI, database, Docker, git/npm, and textbook content unless it is directly research-method knowledge.
+
+PR workflow:
+- Create a branch.
+- Add only the converted skill files.
+- Run the repo validator or the closest available path check.
+- Open a GitHub PR with a short summary and the list of generated skills.
+```
+
+</details>
+
 > Don't see your field? [Propose a new area →](https://github.com/ScienceIntelligence/ResearchSkills/issues/new?template=04-propose-new-area.md) · Need a skill but can't write it yourself? [Request a skill →](https://github.com/ScienceIntelligence/ResearchSkills/issues/new?template=02-skill-request.yml)
 
 ---
 
-<h2 align="center">3. Skill Architecture</h2>
+<h2 align="center">4. Skill Architecture</h2>
 
 ResearchSkills skills are grounded in cognitive architecture theory — [Soar](https://en.wikipedia.org/wiki/Soar_(cognitive_architecture)) (Laird, 2012), [ACT-R](https://en.wikipedia.org/wiki/ACT-R) (Anderson, 1996), and [Case-Based Reasoning](https://en.wikipedia.org/wiki/Case-based_reasoning) (Kolodner, 1993). Skills are organized by **how researchers' minds actually store and retrieve expertise**, not by arbitrary categories.
 
@@ -166,7 +216,7 @@ Classified using Case-Based Reasoning terminology:
 ### Directory Structure
 
 ```
-skills/
+.agents/skills/
 └── {domain}/                    # 8 arXiv-aligned domains + management
     └── {subdomain}/             # 181 subcategories
         └── {contributor}/       # Your name
@@ -181,7 +231,7 @@ For the full rationale — why research is hard, why LLMs struggle with it, and 
 
 ---
 
-<h2 align="center">4. Become a Reviewer</h2>
+<h2 align="center">5. Become a Reviewer</h2>
 
 Reviewers are domain experts who guard the scientific quality of skills in their subdomain. You need substantial peer-review experience in the relevant field.
 
@@ -193,7 +243,7 @@ Reviewers are domain experts who guard the scientific quality of skills in their
 
 ---
 
-<h2 align="center">5. Domains</h2>
+<h2 align="center">6. Domains</h2>
 
 <div align="center">
 

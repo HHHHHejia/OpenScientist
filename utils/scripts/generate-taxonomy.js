@@ -2,7 +2,7 @@
 /**
  * generate-taxonomy.js
  *
- * Scan `skills/<domain>/<subdomain>/` directories and emit a JSON file
+ * Scan `.agents/skills/<domain>/<subdomain>/` directories and emit a JSON file
  * mapping domain → sorted list of subdomains. This is the single source of
  * truth for the arXiv-aligned taxonomy used by:
  *   - webserver review page (subdomain dropdown)
@@ -13,7 +13,7 @@
  *   node utils/scripts/generate-taxonomy.js
  *
  * Options:
- *   --skills <path>   directory to scan (default: ./skills)
+ *   --skills <path>   directory to scan (default: ./.agents/skills)
  *   --out <path>      JSON output path (default: ./webserver/public/taxonomy.json)
  *   --pretty          pretty-print JSON (default: true)
  */
@@ -24,7 +24,7 @@ const path = require('path');
 
 function parseArgs(argv) {
   const opts = {
-    skills: 'skills',
+    skills: path.join('.agents', 'skills'),
     out: path.join('webserver', 'public', 'taxonomy.json'),
     pretty: true,
   };
@@ -54,7 +54,7 @@ function main() {
   const outPath = path.resolve(opts.out);
 
   if (!isDir(skillsDir)) {
-    console.error(`error: skills directory not found: ${skillsDir}`);
+    console.error(`error: skill directory not found: ${skillsDir}`);
     process.exit(1);
   }
 

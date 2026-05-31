@@ -57,21 +57,21 @@ Pick the template matching your skill type and copy it to the correct location:
 
 ```bash
 # Procedural — IF-THEN rules for research decisions
-cp skills/_template-procedural.md skills/<domain>/<subdomain>/<your-username>/procedural/<subtype>--<skill-name>.md
+cp .agents/skills/_template-procedural.md .agents/skills/<domain>/<subdomain>/<your-username>/procedural/<subtype>--<skill-name>.md
 
 # Semantic — domain facts LLMs don't reliably know
-cp skills/_template-semantic.md skills/<domain>/<subdomain>/<your-username>/semantic/<subtype>--<skill-name>.md
+cp .agents/skills/_template-semantic.md .agents/skills/<domain>/<subdomain>/<your-username>/semantic/<subtype>--<skill-name>.md
 
 # Episodic — concrete research episodes
-cp skills/_template-episodic.md skills/<domain>/<subdomain>/<your-username>/episodic/<subtype>--<skill-name>.md
+cp .agents/skills/_template-episodic.md .agents/skills/<domain>/<subdomain>/<your-username>/episodic/<subtype>--<skill-name>.md
 ```
 
 **File naming:** `<subtype>--<skill-name>.md`, lowercase, hyphen-separated. Examples:
-- `skills/physics/geophysics/jdoe/procedural/tie--exploiting-cross-domain-concepts.md`
-- `skills/computer-science/machine-learning/jdoe/semantic/correction--batch-norm-placement.md`
-- `skills/physics/geophysics/jdoe/episodic/failure--gradient-explosion-under-fp16.md`
+- `.agents/skills/physics/geophysics/jdoe/procedural/tie--exploiting-cross-domain-concepts.md`
+- `.agents/skills/computer-science/machine-learning/jdoe/semantic/correction--batch-norm-placement.md`
+- `.agents/skills/physics/geophysics/jdoe/episodic/failure--gradient-explosion-under-fp16.md`
 
-> The legacy template (`skills/_template.md`) is still supported for backward compatibility.
+> The legacy template (`.agents/skills/_template.md`) is still supported for backward compatibility.
 
 ### 3.3 Fill in the template
 
@@ -90,7 +90,7 @@ A domain reviewer listed in [CODEOWNERS](../.github/CODEOWNERS) will review your
 
 ## 3. Propose a New Area
 
-All 155 arXiv-aligned subcategory folders are pre-created under `skills/`. If you believe a subdomain is missing or want to propose a new top-level domain, [**open an issue →**](https://github.com/ScienceIntelligence/ResearchSkills/issues/new?template=04-propose-new-area.md)
+All 155 arXiv-aligned subcategory folders are pre-created under `.agents/skills/`. If you believe a subdomain is missing or want to propose a new top-level domain, [**open an issue →**](https://github.com/ScienceIntelligence/ResearchSkills/issues/new?template=04-propose-new-area.md)
 
 ---
 
@@ -179,18 +179,18 @@ cd ResearchSkills
 
 ```bash
 # 程序性 — 科研决策的 IF-THEN 规则
-cp skills/_template-procedural.md skills/<领域>/<子领域>/<用户名>/procedural/<子类型>--<技能名>.md
+cp .agents/skills/_template-procedural.md .agents/skills/<领域>/<子领域>/<用户名>/procedural/<子类型>--<技能名>.md
 
 # 语义性 — LLM 不可靠掌握的领域知识
-cp skills/_template-semantic.md skills/<领域>/<子领域>/<用户名>/semantic/<子类型>--<技能名>.md
+cp .agents/skills/_template-semantic.md .agents/skills/<领域>/<子领域>/<用户名>/semantic/<子类型>--<技能名>.md
 
 # 情景性 — 具体科研经历
-cp skills/_template-episodic.md skills/<领域>/<子领域>/<用户名>/episodic/<子类型>--<技能名>.md
+cp .agents/skills/_template-episodic.md .agents/skills/<领域>/<子领域>/<用户名>/episodic/<子类型>--<技能名>.md
 ```
 
 **命名规范：** `<子类型>--<技能名>.md`，小写字母，用连字符分隔。
 
-> 旧版模板（`skills/_template.md`）仍然支持向后兼容。
+> 旧版模板（`.agents/skills/_template.md`）仍然支持向后兼容。
 
 ### 3.3 填写模板
 
@@ -208,7 +208,7 @@ cp skills/_template-episodic.md skills/<领域>/<子领域>/<用户名>/episodic
 
 ## 4. 提议新领域或子领域
 
-所有 155 个 arXiv 对齐的子领域文件夹已预创建在 `skills/` 下。如果你认为缺少某个子领域或想提议新的顶层领域，[**提交 Issue →**](https://github.com/ScienceIntelligence/ResearchSkills/issues/new?template=04-propose-new-area.md)
+所有 155 个 arXiv 对齐的子领域文件夹已预创建在 `.agents/skills/` 下。如果你认为缺少某个子领域或想提议新的顶层领域，[**提交 Issue →**](https://github.com/ScienceIntelligence/ResearchSkills/issues/new?template=04-propose-new-area.md)
 
 ---
 

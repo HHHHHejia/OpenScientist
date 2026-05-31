@@ -16,7 +16,7 @@ status: draft                                # leave as draft; reviewer will upd
   1. Delete these comment blocks before submitting.
   2. Fill in ALL required frontmatter fields above.
   3. Complete each section below. "Required" sections must be present.
-  4. Run `python utils/tools/validate.py skills/<domain>/<subdomain>/<your-skill>.md` before opening a PR.
+  4. Run `python utils/tools/validate.py .agents/skills/<domain>/<subdomain>/<your-skill>.md` before opening a PR.
   5. See utils/SKILL_SCHEMA.md for full field documentation.
 
   NOTE: The primary contribution method is now decision trees via /researchskills-extract.

@@ -174,7 +174,7 @@ git checkout -b "$BRANCH"
 Each skill must be placed at the correct path. **Create directories that don't exist.**
 
 ```
-skills/<domain>/<subdomain>/<contributor>/<memory_type>/<subtype>--<skill-name>.md
+.agents/skills/<domain>/<subdomain>/<contributor>/<memory_type>/<subtype>--<skill-name>.md
 ```
 
 Rules:
@@ -186,15 +186,15 @@ Rules:
 
 Example paths:
 ```
-skills/statistics/methodology/jdoe/procedural/constraint-failure--auc-computation-with-masked-data.md
-skills/computer-science/machine-learning/jdoe/semantic/correction--batch-norm-placement-misconception.md
-skills/physics/geophysics/jdoe/episodic/adaptation--gradient-explosion-under-fp16.md
+.agents/skills/statistics/methodology/jdoe/procedural/constraint-failure--auc-computation-with-masked-data.md
+.agents/skills/computer-science/machine-learning/jdoe/semantic/correction--batch-norm-placement-misconception.md
+.agents/skills/physics/geophysics/jdoe/episodic/adaptation--gradient-explosion-under-fp16.md
 ```
 
 For each skill:
 
 ```bash
-SKILL_DIR="skills/<domain>/<subdomain>/<contributor>/<memory_type>"
+SKILL_DIR=".agents/skills/<domain>/<subdomain>/<contributor>/<memory_type>"
 mkdir -p "$SKILL_DIR"
 ```
 
@@ -203,7 +203,7 @@ Then write the skill file to `$SKILL_DIR/<subtype>--<skill-name>.md`.
 ### 5.5 — Commit
 
 ```bash
-git add skills/
+git add .agents/skills/
 git commit -m "add(skills): N skills by <contributor>"
 ```
 
@@ -228,7 +228,7 @@ gh pr create \
 <!-- Fill this in: one line per skill, e.g. "- procedural / constraint-failure — statistics/methodology — AUC Computation With Masked Data" -->
 
 ## Checklist
-- [x] Files placed in `skills/<domain>/<subdomain>/<contributor>/<memory_type>/`
+- [x] Files placed in `.agents/skills/<domain>/<subdomain>/<contributor>/<memory_type>/`
 - [x] Filenames follow pattern `<subtype>--<skill-name>.md`
 - [x] All required frontmatter fields filled
 - [x] All required body sections present

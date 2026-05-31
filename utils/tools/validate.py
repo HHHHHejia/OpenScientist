@@ -2,6 +2,7 @@
 """Validate ResearchSkills skill files against the schema defined in SKILL_SCHEMA.md."""
 
 import sys
+import re
 from pathlib import Path
 
 try:
@@ -12,51 +13,66 @@ except ImportError:
 
 REQUIRED_FIELDS = {
     "name": str,
-    "description": str,
+    "memory_type": str,
+    "subtype": str,
     "domain": str,
-    "author": str,
-    "expertise_level": str,
-    "status": str,
+    "subdomain": str,
+    "contributor": str,
 }
 
-VALID_EXPERTISE_LEVELS = {"beginner", "intermediate", "advanced"}
-VALID_STATUSES = {"draft", "reviewed", "verified"}
+VALID_MEMORY_TYPES = {"procedural", "semantic", "episodic"}
+VALID_SUBTYPES = {
+    "procedural": {"tie", "no-change", "constraint-failure", "operator-fail"},
+    "semantic": {"frontier", "non-public", "correction"},
+    "episodic": {"failure", "adaptation", "anomalous"},
+}
 
-REQUIRED_SECTIONS = [
-    "## Purpose",
-    "## Domain Knowledge",
-    "## Reasoning Protocol",
-    "## Common Pitfalls",
-]
+REQUIRED_SECTIONS = {
+    "semantic": ["## Fact"],
+    "episodic": ["## Situation", "## Action", "## Outcome"],
+}
 
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
-SKILLS_DIR = REPO_ROOT / "skills"
+SKILLS_DIR = REPO_ROOT / ".agents" / "skills"
 
 # Derive valid domains from directory structure (single source of truth)
 VALID_DOMAINS = {p.name for p in SKILLS_DIR.iterdir() if p.is_dir() and not p.name.startswith('.')} if SKILLS_DIR.is_dir() else set()
 
 
+def slugify(value: str) -> str:
+    """Normalize display names to the filename slug convention."""
+    value = value.lower().replace("_", "-")
+    value = re.sub(r"[^a-z0-9]+", "-", value)
+    return value.strip("-")
+
+
 def validate_path(path: Path) -> list[str]:
-    """Validate that the skill file is in a correct skills/<domain>/<subdomain>/ directory."""
+    """Validate that the skill file is in a correct .agents/skills/<domain>/<subdomain>/<contributor>/<memory_type>/ directory."""
     errors = []
     try:
         rel = path.resolve().relative_to(SKILLS_DIR)
     except ValueError:
-        errors.append(f"File is not under skills/ directory")
+        errors.append(f"File is not under .agents/skills/ directory")
         return errors
 
-    parts = rel.parts  # e.g. ('physics', 'quantum-physics', 'my-skill.md')
-    if len(parts) < 3:
-        errors.append(f"File must be in skills/<domain>/<subdomain>/, got: skills/{'/'.join(parts)}")
+    parts = rel.parts  # e.g. ('physics', 'geophysics', 'jdoe', 'semantic', 'correction--x.md')
+    if len(parts) < 5:
+        errors.append(f"File must be in .agents/skills/<domain>/<subdomain>/<contributor>/<memory_type>/, got: .agents/skills/{'/'.join(parts)}")
         return errors
 
-    domain, subdomain = parts[0], parts[1]
+    domain, subdomain, contributor, memory_type = parts[0], parts[1], parts[2], parts[3]
     if domain not in VALID_DOMAINS:
         errors.append(f"Invalid domain folder '{domain}'. Must be one of: {sorted(VALID_DOMAINS)}")
 
     subdomain_dir = SKILLS_DIR / domain / subdomain
     if not subdomain_dir.is_dir():
-        errors.append(f"Subdomain folder 'skills/{domain}/{subdomain}/' does not exist")
+        errors.append(f"Subdomain folder '.agents/skills/{domain}/{subdomain}/' does not exist")
+
+    if not contributor:
+        errors.append("Contributor folder must not be empty")
+
+    if memory_type not in VALID_MEMORY_TYPES:
+        errors.append(f"Invalid memory type folder '{memory_type}'. Must be one of: {sorted(VALID_MEMORY_TYPES)}")
 
     return errors
 
@@ -100,20 +116,28 @@ def validate_file(path: Path) -> list[str]:
     if front.get("domain") and front["domain"] not in VALID_DOMAINS:
         errors.append(f"Invalid domain '{front['domain']}'. Must be one of: {sorted(VALID_DOMAINS)}")
 
-    if front.get("expertise_level") and front["expertise_level"] not in VALID_EXPERTISE_LEVELS:
-        errors.append(f"Invalid expertise_level '{front['expertise_level']}'. Must be one of: {sorted(VALID_EXPERTISE_LEVELS)}")
+    memory_type = front.get("memory_type")
+    subtype = front.get("subtype")
+    if memory_type and memory_type not in VALID_MEMORY_TYPES:
+        errors.append(f"Invalid memory_type '{memory_type}'. Must be one of: {sorted(VALID_MEMORY_TYPES)}")
 
-    if front.get("status") and front["status"] not in VALID_STATUSES:
-        errors.append(f"Invalid status '{front['status']}'. Must be one of: {sorted(VALID_STATUSES)}")
+    if memory_type in VALID_SUBTYPES and subtype and subtype not in VALID_SUBTYPES[memory_type]:
+        errors.append(f"Invalid subtype '{subtype}' for memory_type '{memory_type}'. Must be one of: {sorted(VALID_SUBTYPES[memory_type])}")
 
     # Check name matches filename
-    expected_name = path.stem
-    if front.get("name") and front["name"] != expected_name:
+    expected_name = path.stem.split("--", 1)[1] if "--" in path.stem else path.stem
+    if front.get("name") and slugify(front["name"]) != expected_name:
         errors.append(f"'name' field '{front['name']}' does not match filename '{expected_name}'")
 
     # Check required sections in body
     body = parts[2]
-    for section in REQUIRED_SECTIONS:
+    required_sections = REQUIRED_SECTIONS.get(memory_type, [])
+    if memory_type == "procedural":
+        has_decision_schema = ("## When" in body or "## When + Exclusions" in body) and "## Decision" in body
+        has_procedure_schema = "## Situation" in body and "## Procedure" in body
+        if not (has_decision_schema or has_procedure_schema):
+            errors.append("Missing procedural structure: use either '## When' + '## Decision' or '## Situation' + '## Procedure'")
+    for section in required_sections:
         if section not in body:
             errors.append(f"Missing required section: '{section}'")
 

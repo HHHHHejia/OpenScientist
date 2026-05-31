@@ -397,4 +397,4 @@ Output:
 ### Phase 3: 文档
 - [ ] 更新 `commands/researchskills-extract.md` 支持动态路径
 - [ ] 更新 `README.md` 双平台说明
-- [ ] 更新 `ResearchSkills/readme.md`
+- [ ] 更新 `ResearchSkills/README.md`
