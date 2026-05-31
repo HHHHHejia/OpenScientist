@@ -13,7 +13,8 @@ Treat extraction and conversion as a normal ResearchSkills skill workflow, not a
 
 Preferred:
 - Ask for the source path, conversation export, or pasted source material.
-- Read only the requested source and directly referenced files needed to understand it.
+- Use `scripts/researchskills-extract.sh` on macOS/Linux or `scripts/researchskills-extract.ps1` on Windows when the source is a file or directory. The helper builds a bounded source bundle, a manifest, and an extraction prompt without installing anything globally.
+- Read only the requested source bundle and directly referenced files needed to understand it.
 - Extract one reusable research know-how item per output skill.
 - Assign exactly one memory type: `procedural`, `semantic`, or `episodic`.
 - Assign exactly one subtype:
@@ -23,6 +24,28 @@ Preferred:
 - Place the generated file under `.agents/skills/<domain>/<subdomain>/<contributor>/<memory_type>/<subtype>--<skill-name>.md`.
 - Remove private paths, usernames, private URLs, project names, and collaborator names while preserving scientific parameters, methods, model names, datasets, and mechanisms.
 - Validate the generated files, then submit them by GitHub PR.
+
+Helper examples:
+
+```bash
+.agents/skills/researchskills-extract/scripts/researchskills-extract.sh path/to/source \
+  --domain computer-science \
+  --subdomain artificial-intelligence \
+  --contributor your-github-handle
+```
+
+```powershell
+.agents/skills/researchskills-extract/scripts/researchskills-extract.ps1 path\to\source `
+  -Domain computer-science `
+  -Subdomain artificial-intelligence `
+  -Contributor your-github-handle
+```
+
+After running the helper, read the generated `extraction-prompt.md`, create skill files under `.agents/skills/`, and validate them with:
+
+```bash
+python utils/tools/validate.py .agents/skills/<domain>/<subdomain>/<contributor>/<memory_type>/<subtype>--<skill-name>.md
+```
 
 Rejected:
 - Do not install or document a separate npm package for this workflow.
@@ -35,6 +58,7 @@ Reasoning: the extraction workflow is itself a meta skill: it teaches an agent h
 ## Local Verifiers
 - Every generated skill has frontmatter fields: `name`, `memory_type`, `subtype`, `domain`, `subdomain`, and `contributor`.
 - The file path matches its frontmatter memory type and subtype.
+- The helper output includes `source-manifest.tsv`, `source-bundle.md`, and `extraction-prompt.md`.
 - The body contains a concrete trigger, action or fact, reasoning mechanism, and failure or anti-example guidance when applicable.
 - Private identifiers are removed, but scientific content remains specific enough to be useful.
 - Repository validation passes for the generated skill files.
