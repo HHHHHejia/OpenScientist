@@ -172,13 +172,13 @@ jobs:
           for row in $(echo "$SUBDOMAINS_JSON" | jq -r '.[] | @base64'); do
             DOMAIN_FOLDER=$(echo "$row" | base64 -d | jq -r '.domainFolder')
             SUBDOMAIN_FOLDER=$(echo "$row" | base64 -d | jq -r '.subdomainFolder')
-            NEW_LINE="skills/${DOMAIN_FOLDER}/${SUBDOMAIN_FOLDER}/  @${USERNAME} @HHHHHejia"
+            NEW_LINE=".agents/skills/${DOMAIN_FOLDER}/${SUBDOMAIN_FOLDER}/  @${USERNAME} @HHHHHejia"
 
-            if grep -q "^skills/${DOMAIN_FOLDER}/${SUBDOMAIN_FOLDER}/" "$CODEOWNERS_PATH"; then
+            if grep -q "^\\.agents/skills/${DOMAIN_FOLDER}/${SUBDOMAIN_FOLDER}/" "$CODEOWNERS_PATH"; then
               echo "CODEOWNERS entry for ${DOMAIN_FOLDER}/${SUBDOMAIN_FOLDER} already exists, updating..."
-              sed -i "s|^skills/${DOMAIN_FOLDER}/${SUBDOMAIN_FOLDER}/.*|${NEW_LINE}|" "$CODEOWNERS_PATH"
+              sed -i "s|^\\.agents/skills/${DOMAIN_FOLDER}/${SUBDOMAIN_FOLDER}/.*|${NEW_LINE}|" "$CODEOWNERS_PATH"
             else
-              DOMAIN_LINE=$(grep -n "^skills/${DOMAIN_FOLDER}/ " "$CODEOWNERS_PATH" | head -1 | cut -d: -f1)
+              DOMAIN_LINE=$(grep -n "^\\.agents/skills/${DOMAIN_FOLDER}/ " "$CODEOWNERS_PATH" | head -1 | cut -d: -f1)
               if [ -n "$DOMAIN_LINE" ]; then
                 sed -i "${DOMAIN_LINE}a\\${NEW_LINE}" "$CODEOWNERS_PATH"
               else

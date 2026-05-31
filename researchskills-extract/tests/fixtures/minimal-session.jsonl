@@ -1,2 +1,0 @@
-{"type":"user","message":{"role":"user","content":[{"type":"text","text":"hello"}]},"uuid":"c001","timestamp":"2026-03-17T08:00:00Z","sessionId":"test-minimal-001","cwd":"/Users/scientist/projects/test"}
-{"type":"assistant","message":{"role":"assistant","content":[{"type":"text","text":"Hello! How can I help you today?"}]},"uuid":"c002","timestamp":"2026-03-17T08:00:05Z","sessionId":"test-minimal-001"}

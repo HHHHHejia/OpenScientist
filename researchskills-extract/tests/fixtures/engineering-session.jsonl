@@ -1,4 +1,0 @@
-{"type":"user","message":{"role":"user","content":[{"type":"text","text":"Help me set up a Next.js project with Tailwind CSS and deploy it to Vercel."}]},"uuid":"b001","timestamp":"2026-03-16T09:00:00Z","sessionId":"test-eng-001","cwd":"/Users/dev/projects/my-website"}
-{"type":"assistant","message":{"role":"assistant","content":[{"type":"text","text":"I'll help you set up a Next.js project with Tailwind CSS. Let's start with creating the project..."}]},"uuid":"b002","timestamp":"2026-03-16T09:01:00Z","sessionId":"test-eng-001"}
-{"type":"user","message":{"role":"user","content":[{"type":"text","text":"Now add a dark mode toggle to the navbar."}]},"uuid":"b003","timestamp":"2026-03-16T09:15:00Z","sessionId":"test-eng-001"}
-{"type":"assistant","message":{"role":"assistant","content":[{"type":"text","text":"Sure, I'll add a dark mode toggle component..."}]},"uuid":"b004","timestamp":"2026-03-16T09:16:00Z","sessionId":"test-eng-001"}

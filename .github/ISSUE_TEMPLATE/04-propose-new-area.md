@@ -12,7 +12,7 @@ assignees: HHHHHejia
 
 ## Type
 
-- [ ] New top-level domain (new folder directly under `skills/`)
+- [ ] New top-level domain (new folder directly under `.agents/skills/`)
 - [ ] New subdomain (subfolder within an existing domain — no approval needed, just include in your PR)
 
 ## Scope
