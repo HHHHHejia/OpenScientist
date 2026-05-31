@@ -74,7 +74,7 @@ bunx skills add ScienceIntelligence/ResearchSkills
 
 ### Method A: Use the ResearchSkills Meta Skill (Recommended)
 
-Install the library, then ask Claude Code, Codex, or another markdown-aware agent to use the `researchskills-meta-skill-extraction-and-conversion` skill. This is a **meta skill**: it turns conversation history, local skills, prompts, rubrics, notes, or other research know-how into ResearchSkills files.
+Install the library, then ask Claude Code, Codex, or another markdown-aware agent to use the `researchskills-extract` skill. This is a **meta skill**: it turns conversation history, local skills, prompts, rubrics, notes, or other research know-how into ResearchSkills files.
 
 Example prompt:
 

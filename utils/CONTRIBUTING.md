@@ -12,7 +12,7 @@ Thank you for contributing your expertise! There are three ways to contribute:
 
 ### Via Claude Code / Codex
 
-Install the library with `npx skills add ScienceIntelligence/ResearchSkills` or `bunx skills add ScienceIntelligence/ResearchSkills`, then ask your agent to use `researchskills-meta-skill-extraction-and-conversion`.
+Install the library with `npx skills add ScienceIntelligence/ResearchSkills` or `bunx skills add ScienceIntelligence/ResearchSkills`, then ask your agent to use `researchskills-extract`.
 
 The meta skill scans the source material you provide, extracts research skills (procedural, semantic, and episodic), writes them under `.agents/skills/`, and prepares them for GitHub PR submission.
 
@@ -24,7 +24,7 @@ https://researchskills.ai/submit-manually
 
 ## 2. Convert Existing Skills
 
-Already have research skills in notes, documents, local skills, prompts, rubrics, or any format? Use `researchskills-meta-skill-extraction-and-conversion` to convert them and open a PR.
+Already have research skills in notes, documents, local skills, prompts, rubrics, or any format? Use `researchskills-extract` to convert them and open a PR.
 
 The meta skill asks where your source material is, reads it, converts each reusable research know-how item into the correct format, and places files under `.agents/skills/<domain>/<subdomain>/<contributor>/<memory_type>/<subtype>--<skill-name>.md`. It should preserve scientific content while removing private identifiers.
 
@@ -122,7 +122,7 @@ Open a GitHub Discussion or reach out to the core team via issues.
 
 ### 通过 Claude Code / Codex
 
-先用 `npx skills add ScienceIntelligence/ResearchSkills` 或 `bunx skills add ScienceIntelligence/ResearchSkills` 安装技能库，然后让你的 agent 使用 `researchskills-meta-skill-extraction-and-conversion`。
+先用 `npx skills add ScienceIntelligence/ResearchSkills` 或 `bunx skills add ScienceIntelligence/ResearchSkills` 安装技能库，然后让你的 agent 使用 `researchskills-extract`。
 
 这个 meta skill 会扫描你提供的源材料，提取科研技能（程序性、语义性和情景性），写入 `.agents/skills/`，并准备通过 GitHub PR 提交。
 
@@ -134,7 +134,7 @@ https://researchskills.ai/submit-manually
 
 ## 2. 转换已有技能
 
-已有科研技能记录、笔记、文档、本地 skill、prompt 或 rubric？使用 `researchskills-meta-skill-extraction-and-conversion` 转换并提交 PR。
+已有科研技能记录、笔记、文档、本地 skill、prompt 或 rubric？使用 `researchskills-extract` 转换并提交 PR。
 
 这个 meta skill 会询问源材料位置，读取并把每个可复用科研 know-how 转换为正确格式，放到 `.agents/skills/<domain>/<subdomain>/<contributor>/<memory_type>/<subtype>--<skill-name>.md`。它应保留科学内容，同时移除私有标识。
 

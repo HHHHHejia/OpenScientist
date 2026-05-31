@@ -1,14 +1,10 @@
 ---
-name: researchskills-meta-skill-extraction-and-conversion
-memory_type: procedural
-subtype: tie
-domain: computer-science
-subdomain: artificial-intelligence
-contributor: scienceintelligence
+name: researchskills-extract
+description: Extract or convert existing research know-how into ResearchSkills files under .agents/skills/.
 ---
 
 ## When
-Use this meta skill when the task is to create ResearchSkills from existing material rather than to apply a domain skill directly. Typical inputs include AI conversation history, local agent skills, slash commands, memory files, rubrics, prompts, lab notes, research logs, or project instructions that may contain reusable research know-how.
+Use this meta skill when the task is to create ResearchSkills from existing material rather than to apply a domain skill directly. Typical inputs include AI conversation history, local agent skills, memory files, rubrics, prompts, lab notes, research logs, or project instructions that may contain reusable research know-how.
 
 Do not use it for generic engineering, DevOps, UI, database, Docker, package-manager, git, or textbook material unless the content directly changes how research should be done.
 

@@ -3,7 +3,7 @@
 ## Repository Layout
 
 - Public research skills live under `.agents/skills/`.
-- The extraction/conversion workflow is a normal meta skill under `.agents/skills/`, not a separate package.
+- The extraction/conversion workflow is the normal meta skill at `.agents/skills/researchskills-extract/SKILL.md`, not a separate package or command.
 - Repository validators and contribution examples should point at `.agents/skills/`, not a top-level `skills/` directory.
 
 ## Editing Rules

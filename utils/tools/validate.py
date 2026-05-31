@@ -35,8 +35,13 @@ REQUIRED_SECTIONS = {
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 SKILLS_DIR = REPO_ROOT / ".agents" / "skills"
 
-# Derive valid domains from directory structure (single source of truth)
-VALID_DOMAINS = {p.name for p in SKILLS_DIR.iterdir() if p.is_dir() and not p.name.startswith('.')} if SKILLS_DIR.is_dir() else set()
+# Derive valid domains from directory structure (single source of truth).
+# Top-level meta skills use .agents/skills/<skill>/SKILL.md and are not domains.
+VALID_DOMAINS = {
+    p.name
+    for p in SKILLS_DIR.iterdir()
+    if p.is_dir() and not p.name.startswith(".") and not (p / "SKILL.md").exists()
+} if SKILLS_DIR.is_dir() else set()
 
 
 def slugify(value: str) -> str:
@@ -56,6 +61,9 @@ def validate_path(path: Path) -> list[str]:
         return errors
 
     parts = rel.parts  # e.g. ('physics', 'geophysics', 'jdoe', 'semantic', 'correction--x.md')
+    if len(parts) == 2 and parts[1] == "SKILL.md":
+        return errors
+
     if len(parts) < 5:
         errors.append(f"File must be in .agents/skills/<domain>/<subdomain>/<contributor>/<memory_type>/, got: .agents/skills/{'/'.join(parts)}")
         return errors
@@ -103,6 +111,20 @@ def validate_file(path: Path) -> list[str]:
 
     if not isinstance(front, dict):
         errors.append("Frontmatter is not a YAML mapping")
+        return errors
+
+    try:
+        rel = path.resolve().relative_to(SKILLS_DIR)
+    except ValueError:
+        rel = None
+
+    if rel and len(rel.parts) == 2 and rel.parts[1] == "SKILL.md":
+        if not isinstance(front.get("name"), str):
+            errors.append("Missing required field: 'name'")
+        if not isinstance(front.get("description"), str):
+            errors.append("Missing required field: 'description'")
+        if front.get("name") and front["name"] != rel.parts[0]:
+            errors.append(f"'name' field '{front['name']}' does not match skill folder '{rel.parts[0]}'")
         return errors
 
     # Check required fields

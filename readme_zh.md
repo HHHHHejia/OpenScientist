@@ -72,7 +72,7 @@ bunx skills add ScienceIntelligence/ResearchSkills
 
 ### 方式 A：使用 ResearchSkills Meta Skill（推荐）
 
-安装技能库后，让 Claude Code、Codex 或任何能读取 markdown skill 的 agent 使用 `researchskills-meta-skill-extraction-and-conversion`。这是一个 **meta skill**：它把对话历史、本地 skill、prompt、rubric、笔记或其他科研 know-how 转成 ResearchSkills 文件。
+安装技能库后，让 Claude Code、Codex 或任何能读取 markdown skill 的 agent 使用 `researchskills-extract`。这是一个 **meta skill**：它把对话历史、本地 skill、prompt、rubric、笔记或其他科研 know-how 转成 ResearchSkills 文件。
 
 示例 prompt：
 
